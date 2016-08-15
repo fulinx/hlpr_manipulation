@@ -126,6 +126,22 @@ class ArmMoveIt:
       print("Unexpected error:", sys.exc_info()[0])
       return None
   
+  def plan_poseTargetsInput(self,target_poses):
+    ## input: list of target poses (6 dof list, 7 dof list, or geometry_msgs.msg.Pose())
+    ## output: plan from current pose to each of the target poses
+   # try:
+      self.group[0].set_pose_targets(target_poses)
+      self.group[0].set_planner_id(self.planner)
+      planAns=self.group[0].plan()
+      return planAns
+    #except:
+    #  print 'No plan found, see the moveit terminal for the error'
+    #  print("Unexpected error:", sys.exc_info()[0])
+
+  def plan_cartesianPath(self, target_poses, eef_step = 0.01, jump_threshold = 0.0):
+    plan, fraction = self.group[0].compute_cartesian_path(target_poses, eef_step, jump_threshold)
+    return plan, fraction
+
   def box_table_scene(self) :
     
     #Scene : add box 
