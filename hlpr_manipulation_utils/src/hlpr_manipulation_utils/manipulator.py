@@ -445,7 +445,17 @@ class Arm:
       self.execute_traj_moveit([self.tuck_network[-1]])
     else:
         self._untuck_with_network()
-
+	
+  def gemini_arm_tuck(self, use_moveit=True, vanilla = False):
+    
+    #just last point
+    if use_moveit:
+      self.execute_traj_moveit([[-1.01, 1.622, 1.75, 0.045, 1.979, -0.573]])
+    else:
+      print "Cannot execute the trajectory. Start Moveit"
+  	
+  
+	
   def _init_tuck_poses(self):
     self.mid_wp = [-1.57, 3.14, 1.05, -1.57, 1.05, 1.57]
     
