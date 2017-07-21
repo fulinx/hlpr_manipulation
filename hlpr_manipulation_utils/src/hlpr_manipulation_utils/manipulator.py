@@ -453,6 +453,13 @@ class Arm:
       self.execute_traj_moveit([[-1.01, 1.622, 1.75, 0.045, 1.979, -0.573]])
     else:
       print "Cannot execute the trajectory. Start Moveit"
+
+  def gemini_arm_lower_tuck(self, use_moveit=True, vanilla = False):
+    #just last point
+    if use_moveit:
+      self.execute_traj_moveit([[1.55, 1.61, 4.53, 1.77, 2.95, -1.29]])
+    else:
+      print "Cannot execute the trajectory. Start Moveit"
   	
   
 	

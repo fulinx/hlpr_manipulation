@@ -48,16 +48,19 @@ joint_limits:
     has_acceleration_limits: false
     max_acceleration: 0
   left_wrist_1_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
     max_acceleration: 0
   left_wrist_2_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
     max_acceleration: 0
   left_wrist_3_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
@@ -113,16 +116,19 @@ joint_limits:
     has_acceleration_limits: false
     max_acceleration: 0
   right_wrist_1_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
     max_acceleration: 0
   right_wrist_2_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
     max_acceleration: 0
   right_wrist_3_joint:
+    has_position_limits: false
     has_velocity_limits: true
     max_velocity: 0.785
     has_acceleration_limits: false
