@@ -3,7 +3,7 @@ from sensor_msgs.msg import JointState
 from vector_msgs.msg import JacoCartesianVelocityCmd, LinearActuatorCmd, GripperCmd, GripperStat
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from wpi_jaco_msgs.msg import AngularCommand, CartesianCommand
-#from wpi_jaco_msgs.srv import GravComp
+from wpi_jaco_msgs.srv import GravComp
 from hlpr_manipulation_utils.arm_moveit import *
 
 import rospy
@@ -152,8 +152,24 @@ class Arm:
 #    if(rospy.wait_for_service('/jaco_arm/grav_comp')):
 #      self.gc_connection = True
 #    else:
-    self.gc_connection = False    
+#    self.gc_connection = False    
 #    self.grav_comp_client = rospy.ServiceProxy('/jaco_arm/grav_comp', GravComp)
+
+    grav_comp = '/jaco_arm/grav_comp'
+
+    self.gc_connection = False 
+
+    try:
+      rospy.wait_for_service(grav_comp)
+    except rospy.ROSExecption, e:
+      rospy.logerr("grav comp service not detected")
+    else:
+      rospy.loginfo("grav comp detected")
+      self.gc_connection = True   
+    
+    print "gc_connection = ", self.gc_connection
+
+    self.grav_comp_client = rospy.ServiceProxy(grav_comp, GravComp)
  
     self.arm_planner = ArmMoveIt(arm_prefix = self._arm_prefix) 
 
@@ -172,13 +188,14 @@ class Arm:
     return joint_values
     
   def enableGravComp(self):
-    #if(not self.gc_connection):
-    #  print 'GravComp Service not available'
+   if(not self.gc_connection):
+      print 'GravComp Service not available'
     print self.grav_comp_client(True)
+    # raw_input('GravComp Service enabled')
 
   def disableGravComp(self):
-    #if(not self.gc_connection):
-    #  print 'GravComp Service not available'
+    if(not self.gc_connection):
+      print 'GravComp Service not available'
     print self.grav_comp_client(False)
       
 
